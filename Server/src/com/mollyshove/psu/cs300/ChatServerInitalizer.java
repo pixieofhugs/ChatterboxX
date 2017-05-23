@@ -1,0 +1,29 @@
+package com.mollyshove.psu.cs300;
+
+
+import io.netty.channel.ChannelInitializer;
+import io.netty.channel.ChannelPipeline;
+import io.netty.channel.socket.SocketChannel;
+import io.netty.handler.codec.DelimiterBasedFrameDecoder;
+import io.netty.handler.codec.Delimiters;
+import io.netty.handler.codec.string.StringDecoder;
+import io.netty.handler.codec.string.StringEncoder;
+
+
+/**
+ * Created by pixie on 5/2/2017 for CS202.
+ */
+public class ChatServerInitalizer extends ChannelInitializer<SocketChannel> {
+    @Override
+    protected void initChannel(SocketChannel arg0) throws Exception{
+
+        ChannelPipeline pipeline = arg0.pipeline();
+
+        pipeline.addLast("framer", new DelimiterBasedFrameDecoder(8192, Delimiters.lineDelimiter()));
+        pipeline.addLast("decoder", new StringDecoder());
+        pipeline.addLast("encoder", new StringEncoder());
+
+        pipeline.addLast("handler", new ChatServerHandler());
+    }
+//TODO look up the API for all of the simple functions
+}
