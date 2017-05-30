@@ -10,8 +10,8 @@ message Message {
 //TODO figure out what to do with this enum
   enum MessageType {
     UNIDEFINED = 0;
-    HOME = 1;
-    WORK = 2;
+    PublicMessage = 1;
+    PrivateMessage = 2;
   }
 
 
@@ -31,6 +31,6 @@ message Message {
   message PrivateMessage {
      string sender = 1;
      string recipient = 2;
-     string message = 2 [default = " "];
+     string message = 3 [default = " "];
    }
 }
