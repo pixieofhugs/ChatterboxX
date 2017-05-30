@@ -5,11 +5,11 @@ import java.util.List;
 /**
  * Created by pixie on 5/30/2017 for CS202.
  */
-public class PublicHistory {
+public class publicHistory {
 
     protected List<PublicMessage> publicMessageHistory;
 
-    public PublicHistory() {
+    public publicHistory() {
     }
 
     public int storeMessage(PublicMessage toAdd){
