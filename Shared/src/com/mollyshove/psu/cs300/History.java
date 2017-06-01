@@ -5,24 +5,24 @@ import java.util.List;
 /**
  * Created by pixie on 5/30/2017 for CS202.
  */
-public class privateHistory {
+public class History {
 
-    protected List<message.Message> privateMessageHistory;
+    protected List<NetworkData.Message> privateMessageHistory;
 
-    public privateHistory() {
+    public History() {
     }
 
-    public int storeMessage(PrivateMessage toAdd){
+    public int storeMessage(NetworkData.Message toAdd){
         privateMessageHistory.add(toAdd);
         return 1;
     }
 
-    public PrivateMessage getRecentMessage(){
+    public NetworkData.Message getRecentMessage(){
         return privateMessageHistory.get(0);
 
     }
 
-    public PrivateMessage getSpecificMessage(int indexToGet) {
+    public NetworkData.Message getSpecificMessage(int indexToGet) {
         return privateMessageHistory.get(indexToGet);
 
     }
