@@ -8,12 +8,6 @@ option java_outer_classname = "message";
 message Message {
 
 
-    enum MessageType {
-        UNDEFINED = 0;
-        PublicMessage = 1;
-        PrivateMessage = 2;
-    }
-
     message LoginInfo {
         string userName = 1;
         string password = 2;
@@ -30,5 +24,13 @@ message Message {
         string sender = 1;
         string recipient = 2;
         string message = 3;
+    }
+
+    //one of lets you make prettier menues :D
+    oneof messageType{
+        LoginInfo loginInfo = 1;
+        PublicMessage publicMessage = 2;
+        PrivateMessage privateMessage = 3;
+
     }
 }
