@@ -3,7 +3,7 @@ syntax = "proto3";
 package mollyshove.cs300.proto;
 
 option java_package = "com.mollyshove.psu.cs300";
-option java_outer_classname = "message";
+option java_outer_classname = "NetworkData";
 
 message Message {
 

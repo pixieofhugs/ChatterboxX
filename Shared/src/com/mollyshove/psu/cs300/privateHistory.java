@@ -7,7 +7,7 @@ import java.util.List;
  */
 public class privateHistory {
 
-    protected List<PrivateMessage> privateMessageHistory;
+    protected List<message.Message> privateMessageHistory;
 
     public privateHistory() {
     }
