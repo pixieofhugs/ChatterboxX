@@ -38,4 +38,15 @@ public class ProtobuffHelper {
                 ).build();
 
     }
+
+    public static NetworkData.Message changeOnline(boolean newStatus, NetworkData.Message toChange){
+        return NetworkData.Message.newBuilder()
+            .setLoginInfo(
+                NetworkData.Message.LoginInfo.newBuilder()
+                .setUserName(toChange.getLoginInfo().getUserName())
+                .setPassword(toChange.getLoginInfo().getPassword())
+                .setOnline(newStatus)
+            ).build();
+
+    }
 }

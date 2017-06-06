@@ -7,9 +7,13 @@ import java.util.List;
  */
 public class User{
     private List<History> personalHistory;
-    private static NetworkData.Message.LoginInfo.Builder credentials;
+    private NetworkData.Message.LoginInfo.Builder credentials;
 
-    public static boolean loginCheck(NetworkData.Message toCheck) {
+    public User(NetworkData.Message login) {
+        credentials = login.getLoginInfo().toBuilder();
+    }
+
+    public boolean loginCheck(NetworkData.Message toCheck) {
         if(credentials.equals(toCheck.getLoginInfo())) {
             credentials.setOnline(true);
             return true;
