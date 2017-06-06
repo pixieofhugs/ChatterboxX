@@ -31,6 +31,7 @@ public class ChatClient {
         this.host = host;
         this.port = port;
     }
+
     public void run() throws InterruptedException, IOException {
         EventLoopGroup group = new NioEventLoopGroup();
 
@@ -42,13 +43,25 @@ public class ChatClient {
                     .handler(new ChatClientInitializer());//initializer in the original
             Channel channel = bootstrap.connect(host, port).sync().channel();
             BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+
+            channel.writeAndFlush(
+                    ChatClientController.promptLoginInfo()
+            );
+
+
+            //this sends the message and I should probably not delete it
             while(true) {
-                channel.write(in.readLine() + "\r\n");
+                    channel.writeAndFlush(
+                            ProtobuffHelper.buildPublicMessage(
+                                    "snuggleKitten",
+                                    in.readLine() + "\n"
+                            )
+                    );
             }
-        }
-        finally {
+        }finally{
             group.shutdownGracefully();
-        }//FIXME replace ALL THE STINGS
+        }
+
     }
 }
 

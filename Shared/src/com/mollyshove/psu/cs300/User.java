@@ -5,12 +5,16 @@ import java.util.List;
 /**
  * Created by pixie on 5/30/2017 for CS202.
  */
-public class User {
-    private List<History> snuggles;
-    public boolean verifyInfo(NetworkData.Message to_check){
-        //todo implement when you know how proto buffers work
-    if(1 == 1)return true;
-    else return false;
+public class User{
+    private List<History> personalHistory;
+    private static NetworkData.Message.LoginInfo credentials;
+
+    public static boolean loginCheck(NetworkData.Message toCheck){
+        if(credentials.equals(toCheck))
+            return true;
+        else
+            return false;
+
     }
 
 

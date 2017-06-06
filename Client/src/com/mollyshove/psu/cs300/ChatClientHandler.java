@@ -8,9 +8,9 @@ import io.netty.channel.SimpleChannelInboundHandler;
  */
 public class ChatClientHandler extends SimpleChannelInboundHandler<NetworkData.Message> {
     @Override
-    protected void channelRead0(ChannelHandlerContext channelHandlerContext, NetworkData.Message Data) throws Exception {
+    protected void channelRead0(ChannelHandlerContext channelHandlerContext, NetworkData.Message message) throws Exception {
 
-        //call method in controller to po
+        System.out.print(message.getPublicMessage().getSender() + ": " + message.getPublicMessage().getMessage());
 
     }
 
