@@ -14,12 +14,12 @@ import java.util.TreeMap;
  */
 public class ChatServerController {
     public static ChannelGroup channels = new DefaultChannelGroup(GlobalEventExecutor.INSTANCE);
-    public static SortedMap<String, User> onlineUsers = Collections.synchronizedSortedMap(new TreeMap<String,User>());
+    public static SortedMap<String, User> Users = Collections.synchronizedSortedMap(new TreeMap<String,User>());
 
     public static boolean analyzeMessage(NetworkData.Message message, Channel incoming){
         switch(message.getMessageTypeCase()){
             case LOGININFO:
-                authenticate(message);
+                authenticate(message, incoming);
                 break;
 
             case PRIVATEMESSAGE:
@@ -41,15 +41,21 @@ public class ChatServerController {
         return true;
     }
 
-    public static boolean authenticate(NetworkData.Message loginInfo){
-        if(User.loginCheck(loginInfo)) {
-            //set the user online
-            return true;
-        }else{
-            //register user?
-            return false;
-        }
+    public static boolean authenticate(NetworkData.Message loginInfo, Channel channel) {
 
+        User currentUser = Users.get(loginInfo.getLoginInfo().getUserName());
+        if (currentUser != null) {
+            if(User.loginCheck(loginInfo)) {//this checks, and if true changes status to online
+                channel.writeAndFlush(loginInfo);//sends it back
+                return true;
+            } else {
+                channel.writeAndFlush(loginInfo);//sends it back with no online status
+                return false;
+            }
+        } else{
+            //register function
+            return true;
+    }
     }
 
 }
