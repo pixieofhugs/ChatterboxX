@@ -18,7 +18,7 @@ public class LoginScreen {
         loginButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ChatClientController.sendLoginMessage(usernameFeild.getText(), passwordField.getPassword().toString());
+                ChatClientController.sendLoginMessage(usernameFeild.getText(), new String(passwordField.getPassword()));
 
             }
         });

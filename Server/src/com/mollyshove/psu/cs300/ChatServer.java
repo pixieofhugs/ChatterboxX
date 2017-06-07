@@ -16,28 +16,31 @@ public class ChatServer {
         this.port = port;
     }
 
+    private EventLoopGroup bossGroup;
+    private EventLoopGroup workerGroup;
+
     public void run() throws InterruptedException {
-        EventLoopGroup bossGroup = new NioEventLoopGroup();
-        EventLoopGroup workerGroup = new NioEventLoopGroup();
+        bossGroup = new NioEventLoopGroup();
+        workerGroup = new NioEventLoopGroup();
 
-        try{
-            ServerBootstrap bootstrap = new ServerBootstrap()
-            .group(bossGroup, workerGroup)
-            .channel(NioServerSocketChannel.class)
-            .childHandler(new ChatServerInitalizer());
+        ServerBootstrap bootstrap = new ServerBootstrap()
+                .group(bossGroup, workerGroup)
+                .channel(NioServerSocketChannel.class)
+                .childHandler(new ChatServerInitalizer());
 
-            bootstrap.bind(port).sync().channel().closeFuture().sync();
-        }
-        finally {
-            bossGroup.shutdownGracefully();
-            workerGroup.shutdownGracefully();
-
-        }
+        bootstrap.bind(port).sync().channel().closeFuture().sync();
     }
 
     public static void main(String[] args) throws InterruptedException {
 
         new ChatServer(8000).run();
+
+    }
+
+    public void stop() {
+
+        bossGroup.shutdownGracefully();
+        workerGroup.shutdownGracefully();
     }
 }
 

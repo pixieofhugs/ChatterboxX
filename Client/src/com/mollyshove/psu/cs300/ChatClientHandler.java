@@ -10,11 +10,21 @@ public class ChatClientHandler extends SimpleChannelInboundHandler<NetworkData.M
     @Override
     protected void channelRead0(ChannelHandlerContext channelHandlerContext, NetworkData.Message message) throws Exception {
 
-        System.out.print(message.getPublicMessage().getSender() + ": " + message.getPublicMessage().getMessage());
+        ChatClientController.analyzeMessage(message);
+     //   System.out.print(message.getPublicMessage().getSender() + ": " + message.getPublicMessage().getMessage());
 
     }
 
+    @Override
+    public void channelInactive(ChannelHandlerContext ctx) throws Exception {
+        super.channelInactive(ctx);
+        System.out.println("Connection inactive.");
+    }
 
-
-    //TODO add print message for testing
+    @Override
+    public void channelActive(ChannelHandlerContext ctx) throws Exception {
+        super.channelActive(ctx);
+        System.out.println("Connection active.");
+    }
+//TODO add print message for testing
 }

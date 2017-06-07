@@ -23,6 +23,7 @@ import static com.mollyshove.psu.cs300.ChatClientController.server;
 public class ChatClient {
     private final String host;
     private final int port;
+    private EventLoopGroup group;
 
 
     public ChatClient(String host, int port) {
@@ -31,9 +32,8 @@ public class ChatClient {
     }
 
     public void run() throws InterruptedException, IOException {
-        EventLoopGroup group = new NioEventLoopGroup();
+        group = new NioEventLoopGroup();
 
-        try {
             Bootstrap bootstrap = new Bootstrap()
                     .group(group)
                     .channel(NioSocketChannel.class)
@@ -41,9 +41,6 @@ public class ChatClient {
                     .handler(new ChatClientInitializer());//initializer in the original
             server = bootstrap.connect(host, port).sync().channel();//creates the server
 
-        }finally {
-            group.shutdownGracefully();
-        }
     }
 
     public static void sendMessage(String message, String user) throws Exception {
@@ -57,6 +54,11 @@ public class ChatClient {
                             message + "\n"
                     )
             );
+
+    }
+
+    public void stop(){
+        group.shutdownGracefully();
 
     }
 }

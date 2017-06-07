@@ -44,9 +44,20 @@ public class ChatClientController {
     }
 
 
-    public boolean chatWindowBehavior(){
+    public static boolean analyzeMessage(NetworkData.Message message) {
+        switch (message.getMessageTypeCase()) {
+            case LOGININFO:
+                break;
 
+            case PRIVATEMESSAGE:
+                //todo implement this more successfully
+
+                break;
+            case PUBLICMESSAGE:
+                //todo translate to string and send to gui
+                break;
+        }
         return true;
-
     }
+
 }

@@ -8,7 +8,7 @@
     <properties/>
     <border type="none"/>
     <children>
-      <component id="385d9" class="javax.swing.JList" binding="list1" default-binding="true">
+      <component id="385d9" class="javax.swing.JList" binding="userList">
         <constraints>
           <grid row="0" column="0" row-span="2" col-span="1" vsize-policy="6" hsize-policy="2" anchor="0" fill="3" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="50"/>
@@ -16,7 +16,7 @@
         </constraints>
         <properties/>
       </component>
-      <component id="d5952" class="javax.swing.JTextField" binding="textField1" default-binding="true">
+      <component id="d5952" class="javax.swing.JTextField" binding="boxToRead">
         <constraints>
           <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
@@ -24,7 +24,7 @@
         </constraints>
         <properties/>
       </component>
-      <component id="219e6" class="javax.swing.JTextArea" binding="textArea1" default-binding="true">
+      <component id="219e6" class="javax.swing.JTextArea" binding="boxForText">
         <constraints>
           <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="50"/>
