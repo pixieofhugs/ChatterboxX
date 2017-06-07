@@ -15,5 +15,6 @@ public class ChatClientHandler extends SimpleChannelInboundHandler<NetworkData.M
     }
 
 
+
     //TODO add print message for testing
 }

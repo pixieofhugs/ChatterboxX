@@ -10,6 +10,10 @@ import io.netty.channel.socket.nio.NioSocketChannel;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.InterruptedIOException;
+import java.util.Scanner;
+
+import static com.mollyshove.psu.cs300.ChatClientController.server;
 
 
 /**
@@ -19,12 +23,6 @@ import java.io.InputStreamReader;
 public class ChatClient {
     private final String host;
     private final int port;
-
-
-    public static void main(String[] args) throws IOException, InterruptedException {
-        new ChatClient("localhost", 8000).run();
-
-    }
 
 
     public ChatClient(String host, int port) {
@@ -41,26 +39,24 @@ public class ChatClient {
                     .channel(NioSocketChannel.class)
                     .option(ChannelOption.SO_KEEPALIVE, true)
                     .handler(new ChatClientInitializer());//initializer in the original
-            Channel channel = bootstrap.connect(host, port).sync().channel();
-            BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+            server = bootstrap.connect(host, port).sync().channel();//creates the server
 
-            channel.writeAndFlush(
-                    ChatClientController.promptLoginInfo()
-            );
-
-
-            //this sends the message and I should probably not delete it
-            while(true) {
-                    channel.writeAndFlush(
-                            ProtobuffHelper.buildPublicMessage(
-                                    "snuggleKitten",
-                                    in.readLine() + "\n"
-                            )
-                    );
-            }
-        }finally{
+        }finally {
             group.shutdownGracefully();
         }
+    }
+
+    public static void sendMessage(String message, String user) throws Exception {
+
+        //this sends the message and I should probably not delete it
+        Scanner in = new Scanner(System.in);
+
+            server.writeAndFlush(
+                    ProtobuffHelper.buildPublicMessage(
+                            user,
+                            message + "\n"
+                    )
+            );
 
     }
 }

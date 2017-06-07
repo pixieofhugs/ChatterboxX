@@ -13,7 +13,7 @@ public class ChatServerHandler extends SimpleChannelInboundHandler<NetworkData.M
 
     @Override
     protected void channelRead0(ChannelHandlerContext channelHandlerContext, NetworkData.Message message) throws Exception {
-     //   System.out.println(message.toString()); //For shooting trouble when you walked in (so shame on me)
+        System.out.println(message.toString()); //For shooting trouble when you walked in (so shame on me)
 
         ChatServerController.analyzeMessage(message, channelHandlerContext.channel());
         //passes to a function that figures out what kind of message it is and does the right thing.
