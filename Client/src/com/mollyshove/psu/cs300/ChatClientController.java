@@ -4,6 +4,7 @@ package com.mollyshove.psu.cs300;
 import io.netty.channel.Channel;
 
 import javax.swing.*;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -17,6 +18,8 @@ public class ChatClientController {
     private static JFrame loginScreen;
     private static ChatScreen chatScreen;
     public static String user;
+    private static FileWriter log;
+
 
     public static NetworkData.Message promptLoginInfo(){
         //promt the user and get their crap
@@ -51,10 +54,14 @@ public class ChatClientController {
             case LOGININFO:
                 if(message.getLoginInfo().getOnline()){
                         loginScreen.setVisible(false);
-                        chatScreen = new ChatScreen();
+                    chatScreen = new ChatScreen();
                         chatScreen.frame.setVisible(true);
                         user = message.getLoginInfo().getUserName();
-
+                    try {
+                        log = new FileWriter(user + ".txt", true);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
 
                         //or add them to the group chat
                 }
@@ -72,10 +79,20 @@ public class ChatClientController {
             case PUBLICMESSAGE:
                 String toDisplay =  message.getPublicMessage().getMessage();
                 chatScreen.boxForText.append(message.getPublicMessage().getSender() + ": " + toDisplay);
-                //write to file
+                write(toDisplay);
                 break;
         }
         return true;
+    }
+
+    public static void write(String toLog){
+        try {
+            log.write(toLog);
+            log.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
 }
