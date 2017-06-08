@@ -1,10 +1,7 @@
 package com.mollyshove.psu.cs300;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
+import java.awt.event.*;
 
 /**
  * Created by pixie on 6/6/2017 for CS202.
@@ -12,7 +9,9 @@ import java.awt.event.KeyEvent;
 public class ChatScreen {
     private JList userList;
     private JTextField boxToRead;
-    private JTextArea boxForText;
+    public JTextArea boxForText;
+    private JPanel ChatScreen;
+    public JFrame frame;
 
 
     public ChatScreen() {
@@ -20,26 +19,21 @@ public class ChatScreen {
             @Override
             public void keyTyped(KeyEvent e) {
                 super.keyTyped(e);
-                if (e.getKeyCode() == KeyEvent.VK_ENTER) {//if they hit enter key stroke works
+                if (e.getKeyChar() == KeyEvent.VK_ENTER) {//if they hit enter key stroke works
                     try {
-                        ChatClient.sendMessage(boxToRead.getText(), "snuggle kitten");
+                        ChatClient.sendMessage(boxToRead.getText(), ChatClientController.user);
+                        boxToRead.setText("");
                     } catch (Exception e1) {
                         e1.printStackTrace();
                     }
                 }
             }
-
-
-
-
-
         });
-        boxToRead.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
 
-            }
-        });
+        frame = new JFrame("ChatScreen");
+        frame.setContentPane(ChatScreen);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.pack();
     }
 
 

@@ -23,7 +23,7 @@ import static com.mollyshove.psu.cs300.ChatClientController.server;
 public class ChatClient {
     private final String host;
     private final int port;
-    private EventLoopGroup group;
+    private static EventLoopGroup group;
 
 
     public ChatClient(String host, int port) {
@@ -57,7 +57,7 @@ public class ChatClient {
 
     }
 
-    public void stop(){
+    public static void stop(){
         group.shutdownGracefully();
 
     }

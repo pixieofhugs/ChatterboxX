@@ -15,6 +15,8 @@ public class ChatClientController {
     private static Scanner in = new Scanner(System.in);
     public static Channel server;
     private static JFrame loginScreen;
+    private static ChatScreen chatScreen;
+    public static String user;
 
     public static NetworkData.Message promptLoginInfo(){
         //promt the user and get their crap
@@ -47,6 +49,20 @@ public class ChatClientController {
     public static boolean analyzeMessage(NetworkData.Message message) {
         switch (message.getMessageTypeCase()) {
             case LOGININFO:
+                if(message.getLoginInfo().getOnline()){
+                        loginScreen.setVisible(false);
+                        chatScreen = new ChatScreen();
+                        chatScreen.frame.setVisible(true);
+                        user = message.getLoginInfo().getUserName();
+
+
+                        //or add them to the group chat
+                }
+                else{
+                    //display error message
+                    ChatClient.stop();
+                }
+                //
                 break;
 
             case PRIVATEMESSAGE:
@@ -54,7 +70,9 @@ public class ChatClientController {
 
                 break;
             case PUBLICMESSAGE:
-                //todo translate to string and send to gui
+                String toDisplay =  message.getPublicMessage().getMessage();
+                chatScreen.boxForText.append(message.getPublicMessage().getSender() + ": " + toDisplay);
+                //write to file
                 break;
         }
         return true;

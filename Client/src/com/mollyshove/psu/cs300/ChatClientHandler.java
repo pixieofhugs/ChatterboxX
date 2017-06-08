@@ -11,7 +11,7 @@ public class ChatClientHandler extends SimpleChannelInboundHandler<NetworkData.M
     protected void channelRead0(ChannelHandlerContext channelHandlerContext, NetworkData.Message message) throws Exception {
 
         ChatClientController.analyzeMessage(message);
-     //   System.out.print(message.getPublicMessage().getSender() + ": " + message.getPublicMessage().getMessage());
+        //   System.out.print(message.getPublicMessage().getSender() + ": " + message.getPublicMessage().getMessage());
 
     }
 
