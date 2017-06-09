@@ -4,10 +4,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.nio.channels.Channel;
-
-import static org.junit.Assert.*;
-
 /**
  * Created by pixie on 6/8/2017 for CS202.
  */

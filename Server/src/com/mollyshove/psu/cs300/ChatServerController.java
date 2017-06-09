@@ -6,10 +6,9 @@ import io.netty.channel.group.DefaultChannelGroup;
 import io.netty.util.concurrent.GlobalEventExecutor;
 
 import java.util.Collections;
+import java.util.Scanner;
 import java.util.SortedMap;
 import java.util.TreeMap;
-
-import static com.mollyshove.psu.cs300.NetworkData.Message.MessageTypeCase.PUBLICMESSAGE;
 
 /**
  * Created by pixie on 6/5/2017 for CS202.
@@ -17,6 +16,8 @@ import static com.mollyshove.psu.cs300.NetworkData.Message.MessageTypeCase.PUBLI
 public class ChatServerController {
     public static ChannelGroup channels = new DefaultChannelGroup(GlobalEventExecutor.INSTANCE);
     public static SortedMap<String, User> Users = Collections.synchronizedSortedMap(new TreeMap<String, User>());
+    private static Scanner in = new Scanner(System.in);
+    private static String filename =  "users.txt";
 
     public static boolean analyzeMessage(NetworkData.Message message, Channel incoming) {
         switch (message.getMessageTypeCase()) {
@@ -70,5 +71,8 @@ public class ChatServerController {
         return true;
 
     }
+
+
+
     //make a private helper function to build what I will write and flush out to the client
 }
