@@ -59,9 +59,9 @@ public class ChatClient {
 
     }
 
-    public static void stop(){
+    public static boolean stop(){
         group.shutdownGracefully();
-
+        return true;
     }
 }
 

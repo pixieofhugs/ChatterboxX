@@ -44,6 +44,7 @@ public class ChatClientInitializer extends ChannelInitializer<SocketChannel> {
 
     public ChatClientInitializer() {
     }
+
 }
 
 
