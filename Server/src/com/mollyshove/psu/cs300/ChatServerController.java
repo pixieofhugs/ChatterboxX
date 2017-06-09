@@ -63,9 +63,10 @@ public class ChatServerController {
         }
     }
 
-    public static void registerUser(NetworkData.Message loginInfo, Channel channel) {
+    public static boolean registerUser(NetworkData.Message loginInfo, Channel channel) {
 
         Users.putIfAbsent(loginInfo.getLoginInfo().getUserName(), new User(loginInfo));
+        return true;
 
     }
     //make a private helper function to build what I will write and flush out to the client

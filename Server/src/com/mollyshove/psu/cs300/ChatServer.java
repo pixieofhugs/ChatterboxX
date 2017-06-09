@@ -4,6 +4,8 @@ import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
+import org.junit.After;
+import org.junit.Before;
 
 /**
  * Created by pixie on 5/2/2017 for CS202.
@@ -18,6 +20,9 @@ public class ChatServer {
 
     private EventLoopGroup bossGroup;
     private EventLoopGroup workerGroup;
+
+
+
 
     public boolean run() throws InterruptedException {
         bossGroup = new NioEventLoopGroup();

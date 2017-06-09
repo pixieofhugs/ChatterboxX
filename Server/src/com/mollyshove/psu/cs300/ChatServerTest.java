@@ -1,6 +1,8 @@
 package com.mollyshove.psu.cs300;
 
 
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -9,6 +11,18 @@ import static org.junit.Assert.*;
  * Created by pixie on 6/8/2017 for CS202.
  */
 public class ChatServerTest {
+
+    @Before
+    public void setUp() throws Exception {
+    main();
+    run();
+
+    }
+
+    @After
+    public void tearDown() throws Exception {
+    stop();
+    }
 
     @Test
     public void run() throws Exception {

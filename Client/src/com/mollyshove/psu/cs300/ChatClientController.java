@@ -30,7 +30,7 @@ public class ChatClientController {
 
         return ProtobuffHelper.buildLoginInfo(username, password);//make a new message to check
 
-    }
+    }//this was for testing on the console!
 
     public static boolean sendLoginMessage(String username, String password) {
 
