@@ -19,7 +19,7 @@ public class ChatServer {
     private EventLoopGroup bossGroup;
     private EventLoopGroup workerGroup;
 
-    public void run() throws InterruptedException {
+    public boolean run() throws InterruptedException {
         bossGroup = new NioEventLoopGroup();
         workerGroup = new NioEventLoopGroup();
 
@@ -29,6 +29,7 @@ public class ChatServer {
                 .childHandler(new ChatServerInitalizer());
 
         bootstrap.bind(port).sync().channel().closeFuture().sync();
+        return true;
     }
 
     public static void main(String[] args) throws InterruptedException {
@@ -37,10 +38,11 @@ public class ChatServer {
 
     }
 
-    public void stop() {
+    public boolean stop() {
 
         bossGroup.shutdownGracefully();
         workerGroup.shutdownGracefully();
+        return true;
     }
 }
 
