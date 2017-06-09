@@ -31,7 +31,7 @@ public class ChatClient {
         this.port = port;
     }
 
-    public void run() throws InterruptedException, IOException {
+    public boolean run() throws InterruptedException, IOException {
         group = new NioEventLoopGroup();
 
             Bootstrap bootstrap = new Bootstrap()
@@ -41,9 +41,10 @@ public class ChatClient {
                     .handler(new ChatClientInitializer());//initializer in the original
             server = bootstrap.connect(host, port).sync().channel();//creates the server
 
+        return true;
     }
 
-    public static void sendMessage(String message, String user) throws Exception {
+    public static boolean sendMessage(String message, String user) throws Exception {
 
         //this sends the message and I should probably not delete it
         Scanner in = new Scanner(System.in);
@@ -54,6 +55,7 @@ public class ChatClient {
                             message + "\n"
                     )
             );
+            return true;
 
     }
 

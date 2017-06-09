@@ -85,13 +85,15 @@ public class ChatClientController {
         return true;
     }
 
-    public static void write(String toLog){
+    public static boolean write(String toLog){
         try {
             log.write(toLog);
             log.flush();
+            return true;
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return false;
 
     }
 
