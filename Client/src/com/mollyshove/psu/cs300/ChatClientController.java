@@ -39,7 +39,7 @@ public class ChatClientController {
 
     }
 
-    public static void main(Object o) throws IOException, InterruptedException {
+    public static void main(String[] args) throws IOException, InterruptedException {
         ChatClient client = new ChatClient("localhost", 8000);
         client.run();//makes connection from client to server
         loginScreen = LoginScreen.createAndShowLogin();//creates login screen

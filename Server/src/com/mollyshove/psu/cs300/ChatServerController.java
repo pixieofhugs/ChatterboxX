@@ -48,12 +48,13 @@ public class ChatServerController {
     public static boolean authenticate(NetworkData.Message loginInfo, Channel channel) {
 
         User currentUser = Users.get(loginInfo.getLoginInfo().getUserName());
-        if (currentUser != null) {
+        if (currentUser != null) {//if there is a user
+
             if (currentUser.loginCheck(loginInfo)) {//this checks, and if true changes status to online
                 channel.writeAndFlush(ProtobuffHelper.changeOnline(true, loginInfo));//sends it back
                 return true;
             } else {
-                channel.writeAndFlush(ProtobuffHelper.changeOnline(true, loginInfo));//sends it back with no online status
+                channel.writeAndFlush(ProtobuffHelper.changeOnline(false, loginInfo));//sends it back with no online status
                 return false;
             }
         } else {

@@ -16,8 +16,12 @@ public class User{
         if(credentials.equals(toCheck.getLoginInfo())) {
             credentials.setOnline(true);
             return true;
-        } else {
+        }else if(credentials.getUserName().equals(toCheck.getLoginInfo().getUserName()) && !credentials.getPassword().equals(toCheck.getLoginInfo().getPassword())){
+            System.out.print("Your Credentials are incorrect");//this is when they have a bad login
             return false;
+        } else {
+            credentials.setOnline(true);
+            return true;
         }
 
     }
